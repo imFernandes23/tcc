@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import mapStyle from "./GoogleMapsStyles"
 
 function MapComponent({center, zoom}) {
   const ref = useRef(null);
@@ -11,7 +12,8 @@ function MapComponent({center, zoom}) {
       setMap(
         new window.google.maps.Map(ref.current, {
           center,
-          zoom
+          zoom,
+          style
         })
       );
     }
@@ -42,11 +44,13 @@ function MyMap() {
   return (
     <div style={{ display: 'flex', height: '95vh', width: '100vw', position: "absolute", bottom: 0 }}>
       <Wrapper apiKey="AIzaSyCGhU6kv2oz6AIW4LbG-eO3AraMqmIsAdw" render={render}>
-        <MapComponent center={center} zoom={zoom} />
+        <MapComponent center={center} zoom={zoom} style={mapStyle}/>
       </Wrapper>
     </div>
   );
 }
+
+MyMap.defaultProps = mapStyle
 
 //==============================================
 export default MyMap;
